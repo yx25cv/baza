@@ -13,14 +13,15 @@ import java.util.Set;
 @Entity
 @Table(name = "SRPSKA_SLAVA")
 public class SrpskaSlava {
+	@Column(name = "NAZIV")
+	private String naziv;
 	@Column(name = "DATUM")
 	public String datum;
 	@Id
 	@GeneratedValue
 	@Column(name = "SRPSKA_SLAVA")
 	private Long id;
-	@Column(name = "NAZIV")
-	private String naziv;
+
 
 	//@OneToMany(mappedBy = "srpskaSlava")
 	//private Set<LicniPodaci> licniPodaci = new HashSet<>();

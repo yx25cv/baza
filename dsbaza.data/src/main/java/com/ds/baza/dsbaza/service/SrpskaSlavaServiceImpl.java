@@ -5,8 +5,12 @@ import com.ds.baza.dsbaza.repository.SrpskaSlavaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+
 @Service
 public class SrpskaSlavaServiceImpl implements SrpskaSlavaService {
+
+
 
     @Autowired
     private SrpskaSlavaRepository srpskaSlavaRepository;
@@ -14,6 +18,15 @@ public class SrpskaSlavaServiceImpl implements SrpskaSlavaService {
 //    public SrpskaSlavaServiceImpl(SrpskaSlavaRepository srpskaSlavaRepository) {
 //        this.srpskaSlavaRepository = srpskaSlavaRepository;
 //    }
+
+
+    @Override
+    public List<SrpskaSlava> findAll() {
+        List<SrpskaSlava> srpskaSlavas = new ArrayList<>();
+
+        srpskaSlavaRepository.findAll().forEach(srpskaSlavas::add);
+        return srpskaSlavas;
+    }
 
     @Override
     public SrpskaSlava save(SrpskaSlava object) {

@@ -4,7 +4,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -12,10 +14,13 @@ import java.util.Date;
 public class LicniPodaci extends BaseEntity {
 	@Column(name = "IME_RODITELJA")
 	private String imeRoditelja;
+	@NotEmpty
 	@Column(name = "ADRESA")
 	private String adresa;
+	@NotEmpty
 	@Column(name = "PREZIME")
 	private String prezime;
+	@NotEmpty
 	@Column(name = "IME")
 	private String ime;
 	@Column(name = "KONTAKT_ADRESA")
@@ -48,8 +53,9 @@ public class LicniPodaci extends BaseEntity {
 	private String mlb; //not null 13char
 	@Column(name = "OSTALA_ZANIMANJA")
 	private String ostalaZanimanja;
-	@Column(name = "SIF_MESTO")
+	@Column(name = "SIF_MESTO")  //nisam uneo
 	private int sifMesto;
+
 
 	//@ManyToOne
 	@OneToOne//(mappedBy = "licniPodaci")
@@ -62,8 +68,9 @@ public class LicniPodaci extends BaseEntity {
 	private int nazivFirme;
 	@Column(name = "RM")
 	private int rm;
-	@Column(name = "SINDIKAT")
+	@Column(name = "SINDIKAT") //nisam uneo
 	private int sindikat;
+	@NotEmpty
 	@Column(name = "BLK")
 	private String blk;
 	@Column(name = "SMS_MOBILE")

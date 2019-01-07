@@ -7,4 +7,5 @@ public interface SrpskaSlavaRepository extends CrudRepository<SrpskaSlava, Long>
 
     SrpskaSlava findByNaziv(String naziv);
 
+
 }
