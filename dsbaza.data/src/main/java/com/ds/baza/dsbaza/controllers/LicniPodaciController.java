@@ -37,7 +37,7 @@ public class LicniPodaciController {
             try {
             licniPodaciService.save(licniPodaci);
             } catch (BazaException ex) {
-                ObjectError error = new ObjectError(ex.getPolje(),"An account already exists for this email.");
+                ObjectError error = new ObjectError(ex.getPolje(),"Ispravite vrednosti u ovom polju");
                 bindingResult.rejectValue(ex.getPolje(), ex.getError().getFirst().toString(), ex.getError().getSecond());
             return "unos";
             }
