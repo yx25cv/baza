@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/baza.iml" filepath="$PROJECT_DIR$/.idea/baza.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dsbaza.authorizationserver/dsbaza.authorizationserver.iml" filepath="$PROJECT_DIR$/dsbaza.authorizationserver/dsbaza.authorizationserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dsbaza.data/dsbaza.data.iml" filepath="$PROJECT_DIR$/dsbaza.data/dsbaza.data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dsbaza.user/dsbaza.user.iml" filepath="$PROJECT_DIR$/dsbaza.user/dsbaza.user.iml" />
+    </modules>
+  </component>
+</project>
