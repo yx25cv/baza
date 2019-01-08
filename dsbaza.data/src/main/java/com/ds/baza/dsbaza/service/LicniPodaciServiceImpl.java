@@ -2,11 +2,9 @@ package com.ds.baza.dsbaza.service;
 
 import com.ds.baza.dsbaza.errorhandling.BazaException;
 import com.ds.baza.dsbaza.model.LicniPodaci;
+import com.ds.baza.dsbaza.model.SrpskaSlava;
 import com.ds.baza.dsbaza.repository.LicniPodaciRepository;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceException;
 
 @Service
 public class LicniPodaciServiceImpl implements LicniPodaciService {
@@ -14,9 +12,12 @@ public class LicniPodaciServiceImpl implements LicniPodaciService {
     //boolean provera = false;
 
     private final LicniPodaciRepository licniPodaciRepository;
+    private final SrpskaSlavaService srpskaSlavaService;
 
-    public LicniPodaciServiceImpl(LicniPodaciRepository licniPodaciRepository) {
+
+    public LicniPodaciServiceImpl(LicniPodaciRepository licniPodaciRepository, SrpskaSlavaService srpskaSlavaService) {
         this.licniPodaciRepository = licniPodaciRepository;
+        this.srpskaSlavaService = srpskaSlavaService;
     }
 
 //provera ispravnosti maticnog broja
@@ -45,7 +46,12 @@ public class LicniPodaciServiceImpl implements LicniPodaciService {
     @Override
     public LicniPodaci save(LicniPodaci object) {
         validate(object.getMlb());
-
+if(object.getSrpskaSlava().getNaziv() != "") {
+    if (srpskaSlavaService.findByNaziv(object.getSrpskaSlava().getNaziv()) == null) {
+        throw new BazaException(BazaException.ALREADY_EXIST, "srpskaSlava");
+    }
+}
+        object.setSrpskaSlava(srpskaSlavaService.findByNaziv(object.getSrpskaSlava().getNaziv()));
 //        try{
 //            if(licniPodaciRepository.findByIme(object.getIme())!=null) {
 //                throw new BazaException(BazaException.ALREADY_EXIST,"ime");

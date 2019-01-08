@@ -37,9 +37,14 @@ public class DsbazaApplication implements CommandLineRunner {
 //            srpskaSlava.setNaziv("Sveti Arandjel");
 //            srpskaSlavaService.save(srpskaSlava);
 //            srpskaSlava = srpskaSlavaService.findByNaziv("Sveti Arandjel");
+
+//            SrpskaSlava srpskaSlava=srpskaSlavaService.findByNaziv("Sveti Arandjel");
 //            logger.info("vrednost objekta iz baze je: {}", srpskaSlava.toString());
 //
 //            LicniPodaci licni_podaci = new LicniPodaci();
+//            licni_podaci.setIme("asdf");
+//            licni_podaci.setPrezime("asdf");
+//            licni_podaci.setBlk("456");
 //            licni_podaci.setSrpskaSlava(srpskaSlava);
 //            licni_podaci.setAdresa("asdf");
 //            licni_podaci.setMlb("3009987710193");

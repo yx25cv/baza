@@ -2,6 +2,7 @@ package com.ds.baza.dsbaza.controllers;
 
 import com.ds.baza.dsbaza.errorhandling.BazaException;
 import com.ds.baza.dsbaza.model.LicniPodaci;
+import com.ds.baza.dsbaza.model.SrpskaSlava;
 import com.ds.baza.dsbaza.service.LicniPodaciService;
 import com.ds.baza.dsbaza.service.SrpskaSlavaService;
 import org.springframework.stereotype.Controller;
