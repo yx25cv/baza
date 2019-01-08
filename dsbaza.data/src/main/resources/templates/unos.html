@@ -6,10 +6,20 @@
     <link href="../static/css/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet" media="screen"
           th:href="@{/css/bootstrap-3.3.4-dist/css/bootstrap.min.css}"/>
 
+
     <script src="../static/js/jquery-2.1.4.min.js"
             th:src="@{/js/jquery-2.1.4.min.js}"></script>
 
     <script type="text/javascript" th:src="@{/js/jquery.autocomplete.js}"></script>
+    <script type="text/javascript" th:src="@{/js/moment.js}"></script>
+
+    <!--<script type="text/javascript" th:src="@{/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>-->
+    <script src="../static/bootstrap-datetimepicker2/src/js/bootstrap-datetimepicker.js" th:src="@{/bootstrap-datetimepicker2/src/js/bootstrap-datetimepicker.js}"></script>
+    <link rel="stylesheet" href="../static/bootstrap-datetimepicker2/build/css/bootstrap-datetimepicker.css"
+    th:href="@{/bootstrap-datetimepicker2/build/css/bootstrap-datetimepicker.css}">
+    <!--<link rel="stylesheet" media="screen" href="../static/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"-->
+    <!--th:href="@{/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css}">-->
+    <script src="../static/css/bootstrap-3.3.4-dist/js/bootstrap.js" th:src="@{/css/bootstrap-3.3.4-dist/js/bootstrap.js}"></script>
 
     <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
     <title th:text="#{index.page.title}">Unos</title>
@@ -26,6 +36,8 @@
 
         });
     </script>
+
+
 
 </head>
 <body>
@@ -152,12 +164,24 @@
         <div class="form-group" th:class="${#fields.hasErrors('datumRodjenja')} ? 'form-group has-error' : 'form-group'">
             <label class="col-sm-2 control-label">Datum rodjenja:</label>
             <div class="col-sm-10">
+                <div class="input-group date" id="datetimepicker10">
                 <input type="text" class="form-control" th:field="*{datumRodjenja}" th:errorclass="has-error"/>
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('datumRodjenja')}">
                     <li th:each="err : ${#fields.errors('datumRodjenja')}" th:text="${err}"></li>
             </span>
         </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker10').datetimepicker({
+                    format: "DD.MM.YYYY"
+                });
+            });
+        </script>
 
         <div class="form-group" th:class="${#fields.hasErrors('bracnoStanje')} ? 'form-group has-error' : 'form-group'">
             <label class="col-sm-2 control-label">Bračno stanje:</label>

@@ -1,5 +1,7 @@
 package com.ds.baza.dsbaza.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -33,6 +35,7 @@ public class LicniPodaci extends BaseEntity {
 	private String tel3;
 	@Column(name = "POL")
 	private String pol;
+	@DateTimeFormat (pattern = "dd.MM.yyyy")
 	@Column(name = "DATUM_RODJENJA")
 	private Date datumRodjenja;
 	@Column(name = "BRACNO_STANJE")

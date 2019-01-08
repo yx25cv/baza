@@ -46,12 +46,12 @@ public class LicniPodaciServiceImpl implements LicniPodaciService {
     public LicniPodaci save(LicniPodaci object) {
         validate(object.getMlb());
 
-        try{
-            if(licniPodaciRepository.findByIme(object.getIme())!=null) {
-                throw new BazaException(BazaException.ALREADY_EXIST,"ime");
-            }}catch (RuntimeException ex) {
-            throw new BazaException(BazaException.ALREADY_EXIST,"ime");
-        }
+//        try{
+//            if(licniPodaciRepository.findByIme(object.getIme())!=null) {
+//                throw new BazaException(BazaException.ALREADY_EXIST,"ime");
+//            }}catch (RuntimeException ex) {
+//            throw new BazaException(BazaException.ALREADY_EXIST,"ime");
+//        }
 
         try{
         if(licniPodaciRepository.findByMlb(object.getMlb())!=null) {
