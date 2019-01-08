@@ -9,9 +9,23 @@
     <script src="../static/js/jquery-2.1.4.min.js"
             th:src="@{/js/jquery-2.1.4.min.js}"></script>
 
+    <script type="text/javascript" th:src="@{/js/jquery.autocomplete.js}"></script>
 
     <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
     <title th:text="#{index.page.title}">Unos</title>
+
+    <script>
+        $(document).ready(function() {
+
+            $('#autocomplete-input').devbridgeAutocomplete({
+                serviceUrl: '/suggestion',
+                paramName: 'searchstr',
+                minChars: 1,
+                autoSelectFirst: true,
+            });
+
+        });
+    </script>
 
 </head>
 <body>
@@ -30,10 +44,7 @@
                 <input type="text" class="form-control" th:field="*{mlb}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('mlb')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('mlb')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -43,10 +54,7 @@
                 <input type="text" class="form-control" th:field="*{blk}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('blk')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('blk')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -56,10 +64,7 @@
                 <input type="text" class="form-control" th:field="*{ime}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('ime')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('ime')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -70,10 +75,7 @@
                 <input type="text" class="form-control" th:field="*{prezime}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('prezime')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('prezime')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -83,10 +85,7 @@
                 <input type="text" class="form-control" th:field="*{imeRoditelja}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('imeRoditelja')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('imeRoditelja')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -96,10 +95,7 @@
                 <input type="text" class="form-control" th:field="*{adresa}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('adresa')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('adresa')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -109,10 +105,7 @@
                 <input type="text" class="form-control" th:field="*{kontaktAdresa}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('kontaktAdresa')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('kontaktAdresa')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -122,10 +115,7 @@
                 <input type="text" class="form-control" th:field="*{tel1}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('tel1')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('tel1')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -135,10 +125,7 @@
                 <input type="text" class="form-control" th:field="*{tel2}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('tel2')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('tel2')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -148,10 +135,7 @@
                 <input type="text" class="form-control" th:field="*{tel3}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('tel3')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('tel3')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -161,10 +145,7 @@
                 <input type="text" class="form-control" th:field="*{pol}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('pol')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('pol')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -174,10 +155,7 @@
                 <input type="text" class="form-control" th:field="*{datumRodjenja}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('datumRodjenja')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('datumRodjenja')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -187,10 +165,7 @@
                 <input type="text" class="form-control" th:field="*{bracnoStanje}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('bracnoStanje')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('bracnoStanje')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -200,10 +175,7 @@
                 <input type="text" class="form-control" th:field="*{email}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('email')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('email')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -213,10 +185,7 @@
                 <input type="text" class="form-control" th:field="*{radniStatus}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('radniStatus')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('radniStatus')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -226,10 +195,7 @@
                 <input type="text" class="form-control" th:field="*{ss}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('ss')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('ss')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -239,23 +205,17 @@
                 <input type="text" class="form-control" th:field="*{ostalaZanimanja}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('ostalaZanimanja')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('ostalaZanimanja')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
         <div class="form-group" th:class="${#fields.hasErrors('srpskaSlava')} ? 'form-group has-error' : 'form-group'">
             <label class="col-sm-2 control-label">Srpska slava:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" th:field="*{srpskaSlava}" th:errorclass="has-error"/>
+                <input type="text" class="form-control" id="autocomplete-input" th:field="*{srpskaSlava}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('srpskaSlava')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('srpskaSlava')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -265,10 +225,7 @@
                 <input type="text" class="form-control" th:field="*{zanimanje}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('zanimanje')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('zanimanje')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
@@ -278,10 +235,7 @@
                 <input type="text" class="form-control" th:field="*{nazivFirme}" th:errorclass="has-error"/>
             </div>
             <span class="help-block" th:if="${#fields.hasErrors('nazivFirme')}">
-                <ul>
                     <li th:each="err : ${#fields.errors('nazivFirme')}" th:text="${err}"></li>
-                </ul>
-
             </span>
         </div>
 
