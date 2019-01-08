@@ -4,12 +4,16 @@ import com.ds.baza.dsbaza.errorhandling.BazaException;
 import com.ds.baza.dsbaza.model.LicniPodaci;
 import com.ds.baza.dsbaza.model.SrpskaSlava;
 import com.ds.baza.dsbaza.repository.LicniPodaciRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LicniPodaciServiceImpl implements LicniPodaciService {
 
     //boolean provera = false;
+
+    private static final Logger logger = LoggerFactory.getLogger(LicniPodaciServiceImpl.class);
 
     private final LicniPodaciRepository licniPodaciRepository;
     private final SrpskaSlavaService srpskaSlavaService;
@@ -29,14 +33,16 @@ public class LicniPodaciServiceImpl implements LicniPodaciService {
                 3 * (jmbg.charAt(4) - '0' + jmbg.charAt(10) - '0') +
                 2 * (jmbg.charAt(5) - '0' + jmbg.charAt(11) - '0')))) % 11;
         if (proracun != 0) {
+            logger.info("Sada sam u prvom if-u");
             if (proracun + 11 != jmbg.charAt(12) - '0') {
                 //provera = true;
-                throw new BazaException(BazaException.JMBG_NIJE_ISPRAVAN);
+                throw new BazaException(BazaException.JMBG_NIJE_ISPRAVAN, "mlb");
             }
         } else {
             if (proracun != jmbg.charAt(12) - '0') {
+                logger.info("Sada sam u drgom if-u");
                 //provera = true;
-                throw new BazaException(BazaException.JMBG_NIJE_ISPRAVAN);
+                throw new BazaException(BazaException.JMBG_NIJE_ISPRAVAN, "mlb");
 
             }
         }
@@ -45,6 +51,7 @@ public class LicniPodaciServiceImpl implements LicniPodaciService {
 
     @Override
     public LicniPodaci save(LicniPodaci object) {
+        logger.info("Vrednost JMBG je {}", object.getMlb());
         validate(object.getMlb());
 if(object.getSrpskaSlava().getNaziv() != "") {
     if (srpskaSlavaService.findByNaziv(object.getSrpskaSlava().getNaziv()) == null) {
