@@ -61,7 +61,7 @@ public class MlbValidator implements ConstraintValidator<MlbValidatorConstraint,
     public boolean isValid(String mlbField, ConstraintValidatorContext context) {
 
         if (validacija(mlbField)) {
-            context.buildConstraintViolationWithTemplate("JMBG nije ispravan")
+            context.buildConstraintViolationWithTemplate("JMBG nije ispravanććć")
                     .addConstraintViolation()
                     .disableDefaultConstraintViolation();
             return false;
