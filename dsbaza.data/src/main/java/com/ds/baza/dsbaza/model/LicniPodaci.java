@@ -1,14 +1,13 @@
 package com.ds.baza.dsbaza.model;
 
+import com.ds.baza.dsbaza.model.Constraints.MlbValidatorConstraint;
+import com.ds.baza.dsbaza.model.Constraints.SrpskaSlavaValidatorConstraint;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 
 @Entity
@@ -52,6 +51,7 @@ public class LicniPodaci extends BaseEntity {
 	private String ss;
 	@NotEmpty
 	@Size(min = 13, max = 13)
+	@MlbValidatorConstraint
 	@Column(name = "MLB")
 	private String mlb; //not null 13char
 	@Column(name = "OSTALA_ZANIMANJA")
@@ -62,6 +62,7 @@ public class LicniPodaci extends BaseEntity {
 
 	//@ManyToOne
 	@OneToOne//(mappedBy = "licniPodaci")
+	@SrpskaSlavaValidatorConstraint
 	@JoinColumn(name = "SRPSKA_SLAVA")
 	private SrpskaSlava srpskaSlava;
 

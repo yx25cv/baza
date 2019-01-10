@@ -1,5 +1,6 @@
 package com.ds.baza.dsbaza.model;
 
+import com.ds.baza.dsbaza.model.Constraints.SrpskaSlavaValidatorConstraint;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name = "SRPSKA_SLAVA")
 public class SrpskaSlava {
+	@SrpskaSlavaValidatorConstraint
 	@Column(name = "NAZIV")
 	private String naziv;
 	@Column(name = "DATUM")

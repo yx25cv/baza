@@ -10,7 +10,6 @@ public interface SrpskaSlavaService extends CrudService<SrpskaSlava,Long>{
 
     SrpskaSlava findByNaziv (String naziv);
 
-    List<SrpskaSlava> findAll ();
 
 
 }

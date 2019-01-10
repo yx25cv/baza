@@ -5,6 +5,7 @@ import com.ds.baza.dsbaza.model.LicniPodaci;
 import com.ds.baza.dsbaza.model.SrpskaSlava;
 import com.ds.baza.dsbaza.service.LicniPodaciService;
 import com.ds.baza.dsbaza.service.SrpskaSlavaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Controller
 public class LicniPodaciController {
+
 
     private final LicniPodaciService licniPodaciService;
     private final SrpskaSlavaService srpskaSlavaService;

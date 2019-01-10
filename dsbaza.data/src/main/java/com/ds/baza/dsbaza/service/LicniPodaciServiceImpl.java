@@ -2,11 +2,13 @@ package com.ds.baza.dsbaza.service;
 
 import com.ds.baza.dsbaza.errorhandling.BazaException;
 import com.ds.baza.dsbaza.model.LicniPodaci;
-import com.ds.baza.dsbaza.model.SrpskaSlava;
 import com.ds.baza.dsbaza.repository.LicniPodaciRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class LicniPodaciServiceImpl implements LicniPodaciService {
@@ -24,8 +26,17 @@ public class LicniPodaciServiceImpl implements LicniPodaciService {
         this.srpskaSlavaService = srpskaSlavaService;
     }
 
-//provera ispravnosti maticnog broja
-    public void validate (String jmbg) {
+    @Override
+    public Set<LicniPodaci> findAll() {
+        Set<LicniPodaci> licniPodacis = new HashSet<>();
+
+        licniPodaciRepository.findAll().forEach(licniPodacis::add);
+
+        return licniPodacis;
+    }
+
+    //provera ispravnosti maticnog broja
+    private void validate(String jmbg) {
         int proracun = (11 - ((7 * (jmbg.charAt(0) - '0' + jmbg.charAt(6) - '0') +
                 6 * (jmbg.charAt(1) - '0' + jmbg.charAt(7) - '0') +
                 5 * (jmbg.charAt(2) - '0' + jmbg.charAt(8) - '0') +
@@ -48,16 +59,20 @@ public class LicniPodaciServiceImpl implements LicniPodaciService {
         }
     }
 
+    @Override
+    public LicniPodaci findByMlb(String jmbg) {
+            return licniPodaciRepository.findByMlb(jmbg);
+    }
 
     @Override
     public LicniPodaci save(LicniPodaci object) {
         logger.info("Vrednost JMBG je {}", object.getMlb());
         validate(object.getMlb());
-if(object.getSrpskaSlava().getNaziv() != "") {
-    if (srpskaSlavaService.findByNaziv(object.getSrpskaSlava().getNaziv()) == null) {
-        throw new BazaException(BazaException.ALREADY_EXIST, "srpskaSlava");
-    }
-}
+        if (!object.getSrpskaSlava().getNaziv().equals("")) {
+            if (srpskaSlavaService.findByNaziv(object.getSrpskaSlava().getNaziv()) == null) {
+                throw new BazaException(BazaException.ALREADY_EXIST, "srpskaSlava");
+            }
+        }
         object.setSrpskaSlava(srpskaSlavaService.findByNaziv(object.getSrpskaSlava().getNaziv()));
 //        try{
 //            if(licniPodaciRepository.findByIme(object.getIme())!=null) {
@@ -66,11 +81,12 @@ if(object.getSrpskaSlava().getNaziv() != "") {
 //            throw new BazaException(BazaException.ALREADY_EXIST,"ime");
 //        }
 
-        try{
-        if(licniPodaciRepository.findByMlb(object.getMlb())!=null) {
-            throw new BazaException(BazaException.ALREADY_EXIST,"mlb");
-        }}catch (RuntimeException ex) {
-            throw new BazaException(BazaException.ALREADY_EXIST,"mlb");
+        try {
+            if (licniPodaciRepository.findByMlb(object.getMlb()) != null) {
+                throw new BazaException(BazaException.ALREADY_EXIST, "mlb");
+            }
+        } catch (RuntimeException ex) {
+            throw new BazaException(BazaException.ALREADY_EXIST, "mlb");
         }
         System.out.println(object.getMlb());
         //System.out.println(provera);
