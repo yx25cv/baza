@@ -35,4 +35,9 @@ public class SrpskaSlavaServiceImpl implements SrpskaSlavaService {
     public SrpskaSlava findByNaziv(String naziv) {
         return srpskaSlavaRepository.findByNaziv(naziv);
     }
+
+    @Override
+    public SrpskaSlava findById(Long id) {
+        return srpskaSlavaRepository.findById(id).orElse(null);
+    }
 }

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<li th:fragment="menuItem (path,active,title,glyph,text)" class="active" th:class="'nav-item ' + ${active==menu ? 'active' : ''}">
+    <a th:href="@{__${path}__}" th:title="${title}">
+        <span th:class="'glyphicon  glyphicon-'+${glyph}" class="glyphicon glyphicon-home" aria-hidden="true"></span>
+        <span th:text="${text}">Template</span>
+    </a>
+</li>
+
+</body>
+</html>

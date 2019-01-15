@@ -23,17 +23,20 @@ public class SrpskaSlavaValidator implements ConstraintValidator<SrpskaSlavaVali
     @Override
     public boolean isValid(SrpskaSlava srpskaSlavaField, ConstraintValidatorContext context) {
 
+        if(srpskaSlavaField.getNaziv()==""){
+            return true;
+        } else {
         try {
             if (srpskaSlavaService.findByNaziv(srpskaSlavaField.getNaziv()) == null) {
-                logger.info("tu sam sada u logu");
+                logger.info("prvi log");
                 return false;
             }
         } catch (RuntimeException ex) {
-            logger.info("tu sam sada u logu");
+            logger.info("drugi log");
             context.buildConstraintViolationWithTemplate("{com.ds.baza.dsbaza.model.Constraints.SrpskaSlavaValidatorConstraint.srpskaslavanepostoji}").addConstraintViolation().disableDefaultConstraintViolation();
             return true;
         }
         return true;
-    }
+    }}
 }
 

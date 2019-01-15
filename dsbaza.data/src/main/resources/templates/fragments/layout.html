@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" th:fragment="layout (template, menu)">
+<head>
+    <meta charset="UTF-8"/>
+
+    <link href="../static/css/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet" media="screen"
+          th:href="@{/css/bootstrap-3.3.4-dist/css/bootstrap.min.css}"/>
+
+
+    <script src="../static/js/jquery-2.1.4.min.js"
+            th:src="@{/js/jquery-2.1.4.min.js}"></script>
+
+    <script type="text/javascript" th:src="@{/js/jquery.autocomplete.js}"></script>
+
+    <script type="text/javascript" th:src="@{/js/moment.js}"></script>
+
+    <script type="text/javascript" th:src="@{/js/custom.js}" th:remove="${menu} != unos ? 'all'"></script>
+
+    <!--<script type="text/javascript" th:src="@{/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>-->
+    <script src="../static/bootstrap-datetimepicker2/src/js/bootstrap-datetimepicker.js" th:src="@{/bootstrap-datetimepicker2/src/js/bootstrap-datetimepicker.js}"></script>
+    <link rel="stylesheet" href="../static/bootstrap-datetimepicker2/build/css/bootstrap-datetimepicker.css"
+          th:href="@{/bootstrap-datetimepicker2/build/css/bootstrap-datetimepicker.css}">
+    <!--<link rel="stylesheet" media="screen" href="../static/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"-->
+    <!--th:href="@{/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css}">-->
+    <script src="../static/css/bootstrap-3.3.4-dist/js/bootstrap.js" th:src="@{/css/bootstrap-3.3.4-dist/js/bootstrap.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+    <title th:text="#{index.page.title}">Unos</title>
+
+
+    <!-- EOF CSS INCLUDE -->
+
+
+</head>
+
+<body>
+
+<div class="container">
+<div class="navbar navbar-default navbar" th:fragment="header">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/}"><span>My project</span></a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                <!--<span class="sr-only"><os-p>Toggle navigation</os-p></span>-->
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!--<a class="navbar-brand" href="#">My project</a>-->
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+
+
+                <li th:replace="fragments/menuitem :: menuItem ('/index','home','home page','home','Home')">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    <span>Home</span>
+                </li>
+
+                <li th:replace="fragments/menuitem ::menuItem ('/unos','unos','novi unos','floppy-disk','Novi unos')">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    <span>Novi unos</span>
+                </li>
+
+                <li th:replace="fragments/menuitem ::menuItem ('/index','search','pronadji','search','Search')">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                    <span>Search</span>
+                </li>
+
+                <li th:classappend="${module == 'home' ? 'active' : ''}">
+                    <a href="#" th:href="@{/}">Home</a>
+                </li>
+                <li th:classappend="${module == 'tasks' ? 'active' : ''}">
+                    <a href="#" th:href="@{/task}">Tasks</a>
+                </li>
+            <!--</ul>-->
+            <!--<ul class="nav navbar-nav navbar-right">-->
+                <!--<li th:if="${#authorization.expression('!isAuthenticated()')}">-->
+                    <!--<a href="/signin" th:href="@{/signin}">-->
+                        <!--<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in-->
+                    <!--</a>-->
+                <!--</li>-->
+                <!--<li th:if="${#authorization.expression('isAuthenticated()')}">-->
+                    <!--<a href="/logout" th:href="@{#}" onclick="$('#form').submit();">-->
+                        <!--<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Logout-->
+                    <!--</a>-->
+                    <!--<form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>-->
+                <!--</li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+<th:block th:include="${template}"/>
+
+</body>
+</html>

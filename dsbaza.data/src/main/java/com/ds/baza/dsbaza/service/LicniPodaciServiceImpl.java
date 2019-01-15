@@ -6,8 +6,10 @@ import com.ds.baza.dsbaza.repository.LicniPodaciRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -61,7 +63,12 @@ public class LicniPodaciServiceImpl implements LicniPodaciService {
 
     @Override
     public LicniPodaci findByMlb(String jmbg) {
-            return licniPodaciRepository.findByMlb(jmbg);
+        return licniPodaciRepository.findByMlb(jmbg);
+    }
+
+    @Override
+    public LicniPodaci findById(Long id) {
+        return licniPodaciRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -81,16 +88,24 @@ public class LicniPodaciServiceImpl implements LicniPodaciService {
 //            throw new BazaException(BazaException.ALREADY_EXIST,"ime");
 //        }
 
-        try {
-            if (licniPodaciRepository.findByMlb(object.getMlb()) != null) {
-                throw new BazaException(BazaException.ALREADY_EXIST, "mlb");
-            }
-        } catch (RuntimeException ex) {
-            throw new BazaException(BazaException.ALREADY_EXIST, "mlb");
-        }
+//        try {
+//            if (licniPodaciRepository.findByMlb(object.getMlb()) != null) {
+//                throw new BazaException(BazaException.ALREADY_EXIST, "mlb");
+//            }
+//        } catch (RuntimeException ex) {
+//            throw new BazaException(BazaException.ALREADY_EXIST, "mlb");
+//        }
         System.out.println(object.getMlb());
         //System.out.println(provera);
         return licniPodaciRepository.save(object);
 
     }
+
+
+//    public boolean validateMlb(String mlb) {
+//        if (licniPodaciRepository.findByMlb(mlb) != null) {
+//            return false;
+//        }
+//        return true;
+//    }
 }

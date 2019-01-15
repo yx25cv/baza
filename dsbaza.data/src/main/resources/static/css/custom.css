@@ -114,6 +114,8 @@ img {
     line-height: 30px;
 }
 
+/*za autocomplete*/
+
 .autocomplete-suggestions {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -198,3 +200,79 @@ img {
     BACKGROUND: #fff;
     overflow-y: auto;
 }
+
+/*ZA AUTOCOMPLETE ENDS*/
+
+/*za tabelu*/
+/*table {*/
+    /*counter-reset: rowNumber;*/
+/*}*/
+
+/*table tr {*/
+    /*counter-increment: rowNumber;*/
+/*}*/
+
+/*table tr td:first-child::before {*/
+    /*content: counter(rowNumber);*/
+    /*min-width: 1em;*/
+    /*margin-right: 0.5em;*/
+/*}*/
+
+.table-hover tbody tr:hover td {
+        background-color: #7499ff;}
+
+.navbar-default{
+    background-image: none;
+    background-color: #2D3F89;
+    border-style: none;
+    -webkit-box-shadow: none;
+    -webkit-text-fill-color: #FBF130;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus{
+    color: #333333;
+    background-color: #566377;}
+
+.navbar-default .navbar-nav > .nav-item > a:hover{
+    color: #94985c;
+    background-color: #566377;}
+
+/*Za tabele*/
+table{width:100%;}
+table td, table th { border: 1px solid grey;}
+table th { background: #eee;}
+.pagination-div{user-select: none;}
+.pagination-div span{border-radius:3px;border:1px solid #999;
+    padding:5px;margin:10px 0px 0px 10px;display:inline-block}
+span.selected{background:#ccf;}
+
+/*Za paginaciju*/
+.pagination-centered {
+    text-align: center;
+}
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+.pointer-disabled {
+    pointer-events: none;
+}
+
+
+body {
+    overflow-x: hidden;
+}
+
+/*.navbar-default > .active > a{*/
+    /*background-color: transparent;*/
+    /*color: #46a546;*/
+    /*background: #46a546;*/
+/*}*/
+
+/*.active{*/
+    /*background-color: #46a546;*/
+    /*color: #46a546;*/
+    /*background: #46a546;*/
+/*}*/

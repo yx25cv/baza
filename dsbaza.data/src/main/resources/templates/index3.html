@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="sr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+
+    <link href="../static/css/bootstrap-3.3.4-dist/css/bootstrap.min.css" rel="stylesheet" media="screen"
+          th:href="@{/css/bootstrap-3.3.4-dist/css/bootstrap.min.css}"/>
+
+
+    <script src="../static/js/jquery-2.1.4.min.js"
+            th:src="@{/js/jquery-2.1.4.min.js}"></script>
+
+    <script type="text/javascript" th:src="@{/js/jquery.autocomplete.js}"></script>
+
+    <script type="text/javascript" th:src="@{/js/moment.js}"></script>
+
+    <!--<script type="text/javascript" th:src="@{/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>-->
+    <script src="../static/bootstrap-datetimepicker2/src/js/bootstrap-datetimepicker.js"
+            th:src="@{/bootstrap-datetimepicker2/src/js/bootstrap-datetimepicker.js}"></script>
+    <link rel="stylesheet" href="../static/bootstrap-datetimepicker2/build/css/bootstrap-datetimepicker.css"
+          th:href="@{/bootstrap-datetimepicker2/build/css/bootstrap-datetimepicker.css}">
+    <!--<link rel="stylesheet" media="screen" href="../static/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"-->
+    <!--th:href="@{/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css}">-->
+    <script src="../static/css/bootstrap-3.3.4-dist/js/bootstrap.js"
+            th:src="@{/css/bootstrap-3.3.4-dist/js/bootstrap.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+    <title th:text="#{index.page.title}">Unos</title>
+
+    <style>
+        table {
+            width: 100%;
+        }
+
+        table td, table th {
+            border: 1px solid grey;
+        }
+
+        table th {
+            background: #eee;
+        }
+
+        .pagination-div {
+            user-select: none;
+        }
+
+        .pagination-div span {
+            border-radius: 3px;
+            border: 1px solid #999;
+            padding: 5px;
+            margin: 10px 0px 0px 10px;
+            display: inline-block
+        }
+
+        span.selected {
+            background: #ccf;
+        }
+    </style>
+</head>
+<body>
+<!-- START PAGE CONTAINER -->
+
+<div class="container-fluid">
+
+    <!-- START PAGE SIDEBAR -->
+
+    <!-- commented out     <div th:replace="fragments/header :: header"> </div> -->
+
+    <!-- END PAGE SIDEBAR -->
+
+    <!-- PAGE TITLE -->
+
+    <div class="page-title">
+
+        <h2>
+
+            <span class="fa fa-arrow-circle-o-left"></span> Client Viewer
+
+        </h2>
+
+    </div>
+
+    <!-- END PAGE TITLE -->
+
+    <div class="row">
+
+        <table class="table datatable">
+
+            <thead>
+
+            <tr>
+
+                <th>Name</th>
+
+                <th>Address</th>
+
+                <th>Load</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="clientlist : ${clientlist}">
+
+                <td th:text="${clientlist.ime}">Text ...</td>
+
+                <td th:text="${clientlist.prezime}">Text ...</td>
+
+                <td><button type="button"
+
+                            class="btn btn-primary btn-condensed">
+
+                    <i class="glyphicon glyphicon-folder-open"></i>
+
+                </button></td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="row">
+
+            <div class="form-group col-md-1">
+
+                <select class="form-control pagination" id="pageSizeSelect">
+
+                    <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
+
+                            th:value="${pageSize}"
+
+                            th:selected="${pageSize} == ${selectedPageSize}"></option>
+
+                </select>
+
+            </div>
+
+            <div th:if="${clientlist.totalPages != 1}"
+                 class="form-group col-md-11 pagination-centered">
+                <ul class="pagination">
+                    <li th:class="${clientlist.number == 0} ? disabled"><a
+                            class="pageLink"
+                            th:href="@{/(pageSize=${selectedPageSize}, page=1)}">«</a>
+                    </li>
+                    <li th:class="${clientlist.number == 0} ? disabled"><a
+                            class="pageLink"
+                            th:href="@{/(pageSize=${selectedPageSize}, page=${clientlist.number})}">←</a>
+                    </li>
+                    <!--<li-->
+                            <!--th:class="${clientlist.number == (page - 1)} ? 'active pointer-disabled'"-->
+                            <!--th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">-->
+                        <!--<a class="pageLink"-->
+                           <!--th:href="@{/(pageSize=${selectedPageSize}, page=${page})}"-->
+                           <!--th:text="${page}"></a>-->
+                    <!--</li>-->
+                    <li
+                            th:class="${clientlist.number + 1 == clientlist.totalPages} ? disabled">
+
+                        <a class="pageLink"
+
+                           th:href="@{/(pageSize=${selectedPageSize}, page=${clientlist.number + 2})}">→</a>
+
+                    </li>
+
+                    <li
+
+                            th:class="${clientlist.number + 1 == clientlist.totalPages} ? disabled">
+
+                        <a class="pageLink"
+
+                           th:href="@{/(pageSize=${selectedPageSize}, page=${clientlist.totalPages})}">»</a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- END PAGE CONTENT -->
+
+    <!-- END PAGE CONTAINER -->
+
+</div>
+
+
+<script th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    $(document).ready(function() {
+
+        changePageAndSize();
+
+    });
+
+    function changePageAndSize() {
+
+        $('#pageSizeSelect').change(function(evt) {
+
+            window.location.replace("/?pageSize=" + this.value + "&page=1");
+
+        });
+
+    }
+
+    /*]]>*/
+
+</script>
+</body>
+</html>

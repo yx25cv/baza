@@ -61,18 +61,18 @@ public class MlbValidator implements ConstraintValidator<MlbValidatorConstraint,
     public boolean isValid(String mlbField, ConstraintValidatorContext context) {
 
         if (validacija(mlbField)) {
-            context.buildConstraintViolationWithTemplate("JMBG nije ispravanććć")
+            context.buildConstraintViolationWithTemplate("JMBG nije ispravan")
                     .addConstraintViolation()
                     .disableDefaultConstraintViolation();
             return false;
         }
-
-        try {if (licniPodaciService.findByMlb(mlbField) != null) {
-            context.buildConstraintViolationWithTemplate( "{com.ds.baza.dsbaza.model.Constraints.MlbValidatorConstraint.jmbgnepostoji}").addConstraintViolation().disableDefaultConstraintViolation();
-            return false;
-        } } catch (RuntimeException ex) {
-            return true;
-        }
+// ovaj deo eliminisem iz koda zato zbog onog problema sa duplicated value in db kod update-a, validacija je prebacena u controller
+//        try {if (licniPodaciService.findByMlb(mlbField) != null) {
+//            context.buildConstraintViolationWithTemplate( "{com.ds.baza.dsbaza.model.Constraints.MlbValidatorConstraint.jmbgnepostoji}").addConstraintViolation().disableDefaultConstraintViolation();
+//            return false;
+//        } } catch (RuntimeException ex) {
+//            return true;
+//        }
         return true;
     }
 }

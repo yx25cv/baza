@@ -51,7 +51,7 @@ public class LicniPodaci extends BaseEntity {
 	private String ss;
 	@NotEmpty
 	@Size(min = 13, max = 13)
-	@MlbValidatorConstraint
+	//@MlbValidatorConstraint
 	@Column(name = "MLB")
 	private String mlb; //not null 13char
 	@Column(name = "OSTALA_ZANIMANJA")

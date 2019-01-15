@@ -43,10 +43,9 @@ public class SpringMvcConfiguration implements WebMvcConfigurer {
 
         messageSource = new ResourceBundleMessageSource();
         messageSource.setDefaultEncoding("UTF-8");
-        messageSource.setBasename("messages");
+        messageSource.setBasenames("messages", "validationmessages");
 
         return messageSource;
     }
-
 
 }
