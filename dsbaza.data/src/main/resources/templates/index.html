@@ -7,10 +7,14 @@
 
 
 <div class="container">
-
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Pregled članova</h3>
+        </div>
+        <div class="panel-body">
     <!--<div th:replace="fragments/layout :: header"></div>-->
     <!-- PAGE TITLE -->
-    <div class="page-title">
+    <div class="page-title" th:remove="all">
         <h2>
             <span class="fa fa-arrow-circle-o-left"></span> Pregled Članova
         </h2>
@@ -190,6 +194,9 @@
         <span th:if="${page.hasNext()}">
         <a th:href="@{/index(page=${page.totalPages-1},size=${page.size})}">Last</a>
     </span>
+    </div>
+</div>
+
     </div>
 </div>
 

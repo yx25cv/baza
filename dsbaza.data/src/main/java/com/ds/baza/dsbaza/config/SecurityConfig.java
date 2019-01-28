@@ -19,7 +19,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //ovaj bean sam dodao da ne bi bilo encode-ovanja passworda
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return new PasswordEncoderTest();
+        //ovaj deo sam zakomentarisao
+        //return new PasswordEncoderTest();
+        return new BCryptPasswordEncoder();
     }
 
 //    @Override
@@ -33,13 +35,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .formLogin().loginPage("/login").permitAll()
                 //.and().authorizeRequests().antMatchers(HttpMethod.GET, "/**").permitAll()
-                .and().authorizeRequests().antMatchers("/signup", "forgot-password", "reset-password/*").permitAll()
+                .and().authorizeRequests().antMatchers("forgot-password", "reset-password/*").permitAll()
                 .and().authorizeRequests().antMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                .and().authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
+                .and().authorizeRequests().antMatchers("/admin/**", "/signup").hasRole("ADMIN")
                 .and().authorizeRequests().anyRequest().authenticated()
                 .and().logout().permitAll()
                 //za redirectovanje nakon uspesnog logina
                 .and().formLogin().defaultSuccessUrl("/index", true);
+//                .and().exceptionHandling().accessDeniedPage("/403");
                 //ovo dodajem za remember me:
                 //.and().rememberMe().key("topSecret").rememberMeServices(new TokenBasedRememberMeServices(rememberMeKey, userDetailsService));
     }
