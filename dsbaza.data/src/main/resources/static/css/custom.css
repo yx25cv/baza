@@ -221,23 +221,47 @@ img {
 .table-hover tbody tr:hover td {
         background-color: #7499ff;}
 
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #FBF130;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #FBF130;
+}
+
+.navbar-default .navbar-brand {
+    color: #FBF130;
+}
+
 .navbar-default{
     background-image: none;
     background-color: #2D3F89;
     border-style: none;
     -webkit-box-shadow: none;
-    -webkit-text-fill-color: #FBF130;
+    /*-webkit-text-fill-color: #FBF130;*/
 }
 
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus{
-    color: #333333;
+    color: #FBF130;
     background-color: #566377;}
 
 .navbar-default .navbar-nav > .nav-item > a:hover{
     color: #94985c;
     background-color: #566377;}
+
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+    color: #94985c;
+    background-color: #566377;
+}
+
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:focus,
+.navbar-default .navbar-nav>.open>a:hover {
+    color: #94985c;
+    background-color: #566377;
+}
 
 /*Za tabele*/
 table{width:100%;}
@@ -276,3 +300,9 @@ body {
     /*color: #46a546;*/
     /*background: #46a546;*/
 /*}*/
+
+.panel-primary > .panel-heading {
+    background-color: #2D3F89;
+    border-color: #2D3F89;
+    -webkit-text-fill-color: #FBF130;
+}

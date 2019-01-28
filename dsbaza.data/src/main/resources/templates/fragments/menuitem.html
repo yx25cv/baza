@@ -13,5 +13,14 @@
     </a>
 </li>
 
+<ul th:fragment="menuItemRight (path,active,title,glyph,text)" class="active" th:class="'nav navbar-nav navbar-right'">
+    <li th:class="'nav-item ' + ${active==menu ? 'active' : ''}">
+    <a th:href="@{__${path}__}" th:title="${title}">
+        <span th:class="'glyphicon  glyphicon-'+${glyph}" class="glyphicon glyphicon-home" aria-hidden="true"></span>
+        <span th:text="${text}">Template</span>
+    </a>
+    </li>
+</ul>
+
 </body>
 </html>

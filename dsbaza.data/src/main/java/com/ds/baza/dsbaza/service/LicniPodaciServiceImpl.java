@@ -72,32 +72,32 @@ public class LicniPodaciServiceImpl implements LicniPodaciService {
     }
 
     @Override
-    public LicniPodaci save(LicniPodaci object) {
-        logger.info("Vrednost JMBG je {}", object.getMlb());
-        validate(object.getMlb());
-        if (!object.getSrpskaSlava().getNaziv().equals("")) {
-            if (srpskaSlavaService.findByNaziv(object.getSrpskaSlava().getNaziv()) == null) {
+    public LicniPodaci save(LicniPodaci licniPodaci) {
+        logger.info("Vrednost JMBG je {}", licniPodaci.getMlb());
+        validate(licniPodaci.getMlb());
+        if (!licniPodaci.getSrpskaSlava().getNaziv().equals("")) {
+            if (srpskaSlavaService.findByNaziv(licniPodaci.getSrpskaSlava().getNaziv()) == null) {
                 throw new BazaException(BazaException.ALREADY_EXIST, "srpskaSlava");
             }
         }
-        object.setSrpskaSlava(srpskaSlavaService.findByNaziv(object.getSrpskaSlava().getNaziv()));
+        licniPodaci.setSrpskaSlava(srpskaSlavaService.findByNaziv(licniPodaci.getSrpskaSlava().getNaziv()));
 //        try{
-//            if(licniPodaciRepository.findByIme(object.getIme())!=null) {
+//            if(licniPodaciRepository.findByIme(licniPodaci.getIme())!=null) {
 //                throw new BazaException(BazaException.ALREADY_EXIST,"ime");
 //            }}catch (RuntimeException ex) {
 //            throw new BazaException(BazaException.ALREADY_EXIST,"ime");
 //        }
 
 //        try {
-//            if (licniPodaciRepository.findByMlb(object.getMlb()) != null) {
+//            if (licniPodaciRepository.findByMlb(licniPodaci.getMlb()) != null) {
 //                throw new BazaException(BazaException.ALREADY_EXIST, "mlb");
 //            }
 //        } catch (RuntimeException ex) {
 //            throw new BazaException(BazaException.ALREADY_EXIST, "mlb");
 //        }
-        System.out.println(object.getMlb());
+        System.out.println(licniPodaci.getMlb());
         //System.out.println(provera);
-        return licniPodaciRepository.save(object);
+        return licniPodaciRepository.save(licniPodaci);
 
     }
 

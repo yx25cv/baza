@@ -26,3 +26,10 @@ spring:
       test-while-idle: "true"
       validationQuery: "SELECT 1"
       driver-class-name: "com.mysql.jdbc.Driver"
+
+#ovo kaze da se koristi error stranica ako dodje do exception-a
+server:
+  error:
+    whitelabel:
+      enabled: false
+  port: 8090

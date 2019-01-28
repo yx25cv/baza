@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'login')}">
+
+<!--<div th:replace="fragments/header :: header"/>-->
+
+<body>
+<div class="container">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Please sign in</h3>
+    </div>
+    <div class="panel-body">
+
+        <div th:if="${param.logout != null}">
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                You have been logged out</div>
+        </div>
+
+        <div th:if="${param.error != null}">
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Failed to login. <span th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}"><span th:text="'Reason: ' + #{${session.SPRING_SECURITY_LAST_EXCEPTION.class.name}}"></span></span></div>
+
+        </div>
+
+        <form method="post" th:action="@{/login}">
+
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input name="username" type="text" class="form-control" id="username" placeholder="Username">
+                <p class="help-block">Enter your username</p>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+                <p class="help-block">Enter your password</p>
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="remember-me"> Remember Me
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </form>
+    </div>
+</div>
+</div>
+</body>
+
+<div th:replace="fragments/footer :: footer"/>

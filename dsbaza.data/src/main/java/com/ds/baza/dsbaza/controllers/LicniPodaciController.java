@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.ConstraintValidatorContext;
 import javax.validation.Valid;
 import java.util.Locale;
+import java.util.Map;
 
 @Controller
 public class LicniPodaciController {
@@ -40,14 +41,16 @@ public class LicniPodaciController {
         this.messageSource = messageSource;
     }
 
-    @RequestMapping("/")
-    public String redirect(Model model) {
+    @RequestMapping({"", "/"})
+    public String redirect() {
         return "redirect:index";
     }
 
     @RequestMapping("/unos")
-    public String unos(Model model) {
+    public String unos(Model model, Map<String, Object> model2) {
         model.addAttribute("licniPodaci", new LicniPodaci());
+        LicniPodaci licniPodaci = new LicniPodaci();
+        //model2.put("licniPodaci",licniPodaci);
         model.addAttribute("srpskaSlavas", srpskaSlavaService.findAll());
         return "unos";
     }
