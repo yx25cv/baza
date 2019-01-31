@@ -8,6 +8,7 @@
 
 </head>
 <body>
+
 <div class="container">
 
     <div class="panel panel-primary">
@@ -19,254 +20,295 @@
             <h2 th:remove="all">Forma za unos novog člana</h2>
             <!--'/index/'+${licniPodaci.getId()}+'/edit'-->
             <!--th:action="@{/dounos}"-->
-            <form class="form-horizontal" th:object="${licniPodaci}"
+            <form class="form-horizontal multipage" th:object="${licniPodaci}" id="multipage"
                   th:action="@{${#httpServletRequest.requestURI != '/unos' && #httpServletRequest.requestURI != '/dounos'} ? '/index/'+${licniPodaci.getId()}+'/edit' : '/dounos'}"
                   method="post">
+
+
 
                 <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
                     <p th:text="#{licniPodaci.hasErrors}">Error Message</p>
                 </div>
 
-                <div class="form-group" th:class="${#fields.hasErrors('mlb')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">JMBG:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{mlb}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('mlb')}">
-                    <li th:each="err : ${#fields.errors('mlb')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group" th:class="${#fields.hasErrors('blk')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Broj lične karte:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{blk}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('blk')}">
-                    <li th:each="err : ${#fields.errors('blk')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group" th:class="${#fields.hasErrors('ime')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Ime:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{ime}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('ime')}">
-                    <li th:each="err : ${#fields.errors('ime')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-
-                <div class="form-group"
-                     th:class="${#fields.hasErrors('prezime')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Prezime:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{prezime}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('prezime')}">
-                    <li th:each="err : ${#fields.errors('prezime')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group"
-                     th:class="${#fields.hasErrors('imeRoditelja')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Ime roditelja:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{imeRoditelja}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('imeRoditelja')}">
-                    <li th:each="err : ${#fields.errors('imeRoditelja')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group"
-                     th:class="${#fields.hasErrors('adresa')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Adresa:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{adresa}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('adresa')}">
-                    <li th:each="err : ${#fields.errors('adresa')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group"
-                     th:class="${#fields.hasErrors('kontaktAdresa')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Kontakt adresa:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{kontaktAdresa}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('kontaktAdresa')}">
-                    <li th:each="err : ${#fields.errors('kontaktAdresa')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group" th:class="${#fields.hasErrors('tel1')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Telefon fiksni:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{tel1}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('tel1')}">
-                    <li th:each="err : ${#fields.errors('tel1')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group" th:class="${#fields.hasErrors('tel2')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Telefon mobilni:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{tel2}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('tel2')}">
-                    <li th:each="err : ${#fields.errors('tel2')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group" th:class="${#fields.hasErrors('tel3')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Telefon posao:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{tel3}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('tel3')}">
-                    <li th:each="err : ${#fields.errors('tel3')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group" th:class="${#fields.hasErrors('pol')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Pol:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{pol}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('pol')}">
-                    <li th:each="err : ${#fields.errors('pol')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group"
-                     th:class="${#fields.hasErrors('datumRodjenja')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Datum rodjenja:</label>
-                    <div class="col-sm-10">
-                        <div class="input-group date" id="datetimepicker10">
-                            <input type="text" class="form-control" th:field="*{datumRodjenja}"
-                                   th:errorclass="has-error"/>
-                            <div class="input-group-addon">
-                                <span class="glyphicon glyphicon-th"></span>
-                            </div>
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('mlb')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">JMBG:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{mlb}" th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('mlb')}">
+                            <li th:each="err : ${#fields.errors('mlb')}" th:text="${err}"></li>
                         </div>
                     </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('datumRodjenja')}">
-                    <li th:each="err : ${#fields.errors('datumRodjenja')}" th:text="${err}"></li>
-            </span>
-                </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('blk')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Broj lične karte:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{blk}" th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('blk')}">
+                            <li th:each="err : ${#fields.errors('blk')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('ime')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Ime:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{ime}" th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('ime')}">
+                            <li th:each="err : ${#fields.errors('ime')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('prezime')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Prezime:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{prezime}" th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('prezime')}">
+                            <li th:each="err : ${#fields.errors('prezime')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('imeRoditelja')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Ime roditelja:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{imeRoditelja}"
+                                   th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('imeRoditelja')}">
+                            <li th:each="err : ${#fields.errors('imeRoditelja')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('adresa')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Adresa:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{adresa}" th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('adresa')}">
+                            <li th:each="err : ${#fields.errors('adresa')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('kontaktAdresa')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Kontakt adresa:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{kontaktAdresa}"
+                                   th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('kontaktAdresa')}">
+                            <li th:each="err : ${#fields.errors('kontaktAdresa')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('tel1')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Telefon fiksni:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{tel1}" th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('tel1')}">
+                            <li th:each="err : ${#fields.errors('tel1')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('tel2')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Telefon mobilni:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{tel2}" th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('tel2')}">
+                            <li th:each="err : ${#fields.errors('tel2')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('tel3')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Telefon posao:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{tel3}" th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('tel3')}">
+                            <li th:each="err : ${#fields.errors('tel3')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('pol')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Pol:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{pol}" th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('pol')}">
+                            <li th:each="err : ${#fields.errors('pol')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('datumRodjenja')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Datum rodjenja:</label>
+                        <div class="col-sm-10">
+                            <div class="input-group date" id="datetimepicker10">
+                                <input type="text" class="form-control" th:field="*{datumRodjenja}"
+                                       th:errorclass="has-error"/>
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('datumRodjenja')}">
+                            <li th:each="err : ${#fields.errors('datumRodjenja')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('bracnoStanje')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Bračno stanje:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{bracnoStanje}"
+                                   th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('bracnoStanje')}">
+                            <li th:each="err : ${#fields.errors('bracnoStanje')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('email')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">E-mail:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{email}" th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('email')}">
+                            <li th:each="err : ${#fields.errors('email')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('radniStatus')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Radni status:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{radniStatus}"
+                                   th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('radniStatus')}">
+                            <li th:each="err : ${#fields.errors('radniStatus')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('ss')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Stručna sprema:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{ss}" th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('ss')}">
+                            <li th:each="err : ${#fields.errors('ss')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('ostalaZanimanja')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Ostala zanimanja:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{ostalaZanimanja}"
+                                   th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('ostalaZanimanja')}">
+                            <li th:each="err : ${#fields.errors('ostalaZanimanja')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('srpskaSlava')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Srpska slava:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="autocomplete-input"
+                                   th:field="*{srpskaSlava.naziv}"
+                                   th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('srpskaSlava')}">
+                            <li th:each="err : ${#fields.errors('srpskaSlava')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('zanimanje')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Zanimanje:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="autocomplete-input2"
+                                   th:field="*{zanimanje.naziv}"
+                                   th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('zanimanje')}">
+                            <li th:each="err : ${#fields.errors('zanimanje')}" th:text="${err}"></li>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('firme')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Naziv firme:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="autocomplete-input3"
+                                   th:field="*{firme.naziv}"
+                                   th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('firme')}">
+                            <ul>
+                            <li th:each="err : ${#fields.errors('firme')}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="form-group"
+                         th:class="${#fields.hasErrors('rm')} ? 'form-group has-error' : 'form-group'">
+                        <label class="col-sm-2 control-label">Radno mesto:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="autocomplete-input4"
+                                   th:field="*{rm.naziv}"
+                                   th:errorclass="has-error"/>
+                        </div>
+                        <div class="help-block" th:if="${#fields.hasErrors('rm')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('rm')}" th:text="${err}"></li>
+                            </ul>
+
+                        </div>
+                    </div>
 
                 <div class="form-group"
-                     th:class="${#fields.hasErrors('bracnoStanje')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Bračno stanje:</label>
+                     th:class="${#fields.hasErrors('doprinosi')} ? 'form-group has-error' : 'form-group'">
+                    <label class="col-sm-2 control-label">Doprinosi:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{bracnoStanje}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('bracnoStanje')}">
-                    <li th:each="err : ${#fields.errors('bracnoStanje')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group"
-                     th:class="${#fields.hasErrors('email')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">E-mail:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{email}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('email')}">
-                    <li th:each="err : ${#fields.errors('email')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group"
-                     th:class="${#fields.hasErrors('radniStatus')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Radni status:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{radniStatus}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('radniStatus')}">
-                    <li th:each="err : ${#fields.errors('radniStatus')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group" th:class="${#fields.hasErrors('ss')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Stručna sprema:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{ss}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('ss')}">
-                    <li th:each="err : ${#fields.errors('ss')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group"
-                     th:class="${#fields.hasErrors('ostalaZanimanja')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Ostala zanimanja:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{ostalaZanimanja}"
+                        <input type="text" class="form-control"
+                               th:value="${clanovi.doprinosi}"
                                th:errorclass="has-error"/>
                     </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('ostalaZanimanja')}">
-                    <li th:each="err : ${#fields.errors('ostalaZanimanja')}" th:text="${err}"></li>
-            </span>
-                </div>
+                    <div class="help-block" th:if="${#fields.hasErrors('doprinosi')}">
+                        <ul>
+                            <li th:each="err : ${#fields.errors('doprinosi')}" th:text="${err}"></li>
+                        </ul>
 
-                <div class="form-group"
-                     th:class="${#fields.hasErrors('srpskaSlava')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Srpska slava:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="autocomplete-input" th:field="*{srpskaSlava.naziv}"
-                               th:errorclass="has-error"/>
                     </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('srpskaSlava')}">
-                    <li th:each="err : ${#fields.errors('srpskaSlava')}" th:text="${err}"></li>
-            </span>
                 </div>
 
-                <div class="form-group"
-                     th:class="${#fields.hasErrors('zanimanje')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Zanimanje:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{zanimanje}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('zanimanje')}">
-                    <li th:each="err : ${#fields.errors('zanimanje')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group"
-                     th:class="${#fields.hasErrors('nazivFirme')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Naziv firme:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{nazivFirme}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('nazivFirme')}">
-                    <li th:each="err : ${#fields.errors('nazivFirme')}" th:text="${err}"></li>
-            </span>
-                </div>
-
-                <div class="form-group" th:class="${#fields.hasErrors('rm')} ? 'form-group has-error' : 'form-group'">
-                    <label class="col-sm-2 control-label">Radno mesto:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" th:field="*{rm}" th:errorclass="has-error"/>
-                    </div>
-                    <span class="help-block" th:if="${#fields.hasErrors('rm')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('rm')}" th:text="${err}"></li>
-                </ul>
-
-            </span>
-                </div>
                 <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
+                    <div class="col-sm-offset-11 col-sm-10">
                         <div class="row">
                             <button
                                     th:with="text=${#httpServletRequest.requestURI == '/unos' || #httpServletRequest.requestURI == '/dounos'} ? 'Unesi' : 'Izmeni'"
                                     class="btn btn-default" type="submit" th:text="${text}">Submit
                             </button>
+
                         </div>
                     </div>
                 </div>

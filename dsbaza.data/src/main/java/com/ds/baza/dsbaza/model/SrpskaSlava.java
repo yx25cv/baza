@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name = "SRPSKA_SLAVA")
 public class SrpskaSlava {
-	@SrpskaSlavaValidatorConstraint
+//	@SrpskaSlavaValidatorConstraint
 	@Column(name = "NAZIV")
 	private String naziv;
 	@Column(name = "DATUM")

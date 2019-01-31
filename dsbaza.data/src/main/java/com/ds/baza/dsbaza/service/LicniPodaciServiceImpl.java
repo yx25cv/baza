@@ -6,10 +6,8 @@ import com.ds.baza.dsbaza.repository.LicniPodaciRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -21,11 +19,17 @@ public class LicniPodaciServiceImpl implements LicniPodaciService {
 
     private final LicniPodaciRepository licniPodaciRepository;
     private final SrpskaSlavaService srpskaSlavaService;
+    private final ZanimanjeService zanimanjeService;
+    private final FirmeService firmeService;
+    private final RmService rmService;
 
 
-    public LicniPodaciServiceImpl(LicniPodaciRepository licniPodaciRepository, SrpskaSlavaService srpskaSlavaService) {
+    public LicniPodaciServiceImpl(LicniPodaciRepository licniPodaciRepository, SrpskaSlavaService srpskaSlavaService, ZanimanjeService zanimanjeService, FirmeService firmeService, RmService rmService) {
         this.licniPodaciRepository = licniPodaciRepository;
         this.srpskaSlavaService = srpskaSlavaService;
+        this.zanimanjeService = zanimanjeService;
+        this.firmeService = firmeService;
+        this.rmService = rmService;
     }
 
     @Override
@@ -80,7 +84,26 @@ public class LicniPodaciServiceImpl implements LicniPodaciService {
                 throw new BazaException(BazaException.ALREADY_EXIST, "srpskaSlava");
             }
         }
+        if (!licniPodaci.getZanimanje().getNaziv().equals("")) {
+            if (zanimanjeService.findByNaziv(licniPodaci.getZanimanje().getNaziv()) == null) {
+                throw new BazaException(BazaException.ALREADY_EXIST, "zanimanje");
+            }
+        }
+        if (!licniPodaci.getFirme().getNaziv().equals("")) {
+            if (firmeService.findByNaziv(licniPodaci.getFirme().getNaziv()) == null) {
+                throw new BazaException(BazaException.ALREADY_EXIST, "nazivFirme");
+            }
+        }
+
+        if (!licniPodaci.getRm().getNaziv().equals("")) {
+            if (rmService.findByNaziv(licniPodaci.getFirme().getNaziv()) == null) {
+                throw new BazaException(BazaException.ALREADY_EXIST, "rm");
+            }
+        }
         licniPodaci.setSrpskaSlava(srpskaSlavaService.findByNaziv(licniPodaci.getSrpskaSlava().getNaziv()));
+        licniPodaci.setZanimanje(zanimanjeService.findByNaziv(licniPodaci.getZanimanje().getNaziv()));
+        licniPodaci.setFirme(firmeService.findByNaziv(licniPodaci.getFirme().getNaziv()));
+        licniPodaci.setRm(rmService.findByNaziv(licniPodaci.getRm().getNaziv()));
 //        try{
 //            if(licniPodaciRepository.findByIme(licniPodaci.getIme())!=null) {
 //                throw new BazaException(BazaException.ALREADY_EXIST,"ime");

@@ -1,6 +1,7 @@
 package com.ds.baza.dsbaza.controllers;
 
 import com.ds.baza.dsbaza.errorhandling.BazaException;
+import com.ds.baza.dsbaza.model.Clanovi;
 import com.ds.baza.dsbaza.model.LicniPodaci;
 import com.ds.baza.dsbaza.model.PagerModel;
 import com.ds.baza.dsbaza.repository.LicniPodaciRepository;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.validation.ConstraintValidatorContext;
 import javax.validation.Valid;
 import java.util.Locale;
 import java.util.Map;
@@ -49,6 +49,7 @@ public class LicniPodaciController {
     @RequestMapping("/unos")
     public String unos(Model model, Map<String, Object> model2) {
         model.addAttribute("licniPodaci", new LicniPodaci());
+        model.addAttribute("clanovi", new Clanovi());
         LicniPodaci licniPodaci = new LicniPodaci();
         //model2.put("licniPodaci",licniPodaci);
         model.addAttribute("srpskaSlavas", srpskaSlavaService.findAll());
@@ -56,7 +57,7 @@ public class LicniPodaciController {
     }
 
     @RequestMapping(value = "/dounos", method = RequestMethod.POST)
-    public String doUnos(@Validated LicniPodaci licniPodaci, BindingResult bindingResult) {
+    public String doUnos(@Validated LicniPodaci licniPodaci, @Validated Clanovi clanovi, BindingResult bindingResult) {
 //ovaj kod dodajem ovde da bih resio problem oko updatea. Morao sam da izvucem validaciju iz validatora i prebacim je ovde direktno u controler
         if(licniPodaciService.findByMlb(licniPodaci.getMlb()) != null){
             bindingResult.rejectValue("mlb", "error.mlb", messageSource.getMessage("com.ds.baza.dsbaza.model.Constraints.MlbValidatorConstraint.jmbgnepostoji",null, Locale.US));
@@ -105,8 +106,8 @@ public class LicniPodaciController {
 
     @RequestMapping(value = "/index/{ownerId}/edit", method = RequestMethod.POST)
     public String doedit(@Valid LicniPodaci licniPodaci, BindingResult bindingResult, @PathVariable("ownerId") Long id) {
-        if(licniPodaciService.findByMlb(licniPodaci.getMlb()) != null){
-            LicniPodaci LP = licniPodaciService.findByMlb(licniPodaci.getMlb());
+        LicniPodaci LP = licniPodaciService.findByMlb(licniPodaci.getMlb());;
+        if(LP != null){
             if(LP.getId()!=id){
                 bindingResult.rejectValue("mlb", "error.mlb", messageSource.getMessage("com.ds.baza.dsbaza.model.Constraints.MlbValidatorConstraint.jmbgnepostoji",null, Locale.US));
             }}

@@ -33,3 +33,5 @@ server:
     whitelabel:
       enabled: false
   port: 8090
+
+rememberMeKey: topSecret

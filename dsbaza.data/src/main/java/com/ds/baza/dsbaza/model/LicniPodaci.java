@@ -1,7 +1,6 @@
 package com.ds.baza.dsbaza.model;
 
-import com.ds.baza.dsbaza.model.Constraints.MlbValidatorConstraint;
-import com.ds.baza.dsbaza.model.Constraints.SrpskaSlavaValidatorConstraint;
+import com.ds.baza.dsbaza.model.Constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -65,13 +64,18 @@ public class LicniPodaci extends BaseEntity {
 	@SrpskaSlavaValidatorConstraint
 	@JoinColumn(name = "SRPSKA_SLAVA")
 	private SrpskaSlava srpskaSlava;
-
-	@Column(name = "ZANIMANJE")
-	private int zanimanje;
-	@Column(name = "NAZIV_FIRME")
-	private int nazivFirme;
-	@Column(name = "RM")
-	private int rm;
+	@OneToOne
+	@ZanimanjeValidatorConstraint
+	@JoinColumn(name = "ZANIMANJE")
+	private Zanimanje zanimanje;
+	@OneToOne
+	@FirmeValidatorConstraint
+	@JoinColumn(name = "NAZIV_FIRME")
+	private Firme firme;
+	@OneToOne
+	@RmValidatorConstraint
+	@JoinColumn(name = "RM")
+	private Rm rm;
 	@Column(name = "SINDIKAT") //nisam uneo
 	private int sindikat;
 	@NotEmpty
@@ -85,7 +89,7 @@ public class LicniPodaci extends BaseEntity {
 	public LicniPodaci() {
 	}
 
-	public LicniPodaci(String imeRoditelja, String adresa, String prezime, String ime, String kontaktAdresa, String tel1, String tel2, String tel3, String pol, Date datumRodjenja, String bracnoStanje, String pejdzer, String email, String foto, String radniStatus, String ss, String mlb, String ostalaZanimanja, int sifMesto, SrpskaSlava srpskaSlava, int zanimanje, int nazivFirme, int rm, int sindikat, String blk, String smsMobile, String smsMobilePom) {
+	public LicniPodaci(String imeRoditelja, @NotEmpty String adresa, @NotEmpty String prezime, @NotEmpty String ime, String kontaktAdresa, String tel1, String tel2, String tel3, String pol, Date datumRodjenja, String bracnoStanje, String pejdzer, String email, String foto, String radniStatus, String ss, @NotEmpty @Size(min = 13, max = 13) String mlb, String ostalaZanimanja, int sifMesto, SrpskaSlava srpskaSlava, Zanimanje zanimanje, Firme firme, Rm rm, int sindikat, @NotEmpty String blk, String smsMobile, String smsMobilePom) {
 		this.imeRoditelja = imeRoditelja;
 		this.adresa = adresa;
 		this.prezime = prezime;
@@ -107,7 +111,7 @@ public class LicniPodaci extends BaseEntity {
 		this.sifMesto = sifMesto;
 		this.srpskaSlava = srpskaSlava;
 		this.zanimanje = zanimanje;
-		this.nazivFirme = nazivFirme;
+		this.firme = firme;
 		this.rm = rm;
 		this.sindikat = sindikat;
 		this.blk = blk;
@@ -275,27 +279,27 @@ public class LicniPodaci extends BaseEntity {
 		this.srpskaSlava = srpskaSlava;
 	}
 
-	public int getZanimanje() {
+	public Zanimanje getZanimanje() {
 		return zanimanje;
 	}
 
-	public void setZanimanje(int zanimanje) {
+	public void setZanimanje(Zanimanje zanimanje) {
 		this.zanimanje = zanimanje;
 	}
 
-	public int getNazivFirme() {
-		return nazivFirme;
+	public Firme getFirme() {
+		return firme;
 	}
 
-	public void setNazivFirme(int nazivFirme) {
-		this.nazivFirme = nazivFirme;
+	public void setFirme(Firme firme) {
+		this.firme = firme;
 	}
 
-	public int getRm() {
+	public Rm getRm() {
 		return rm;
 	}
 
-	public void setRm(int rm) {
+	public void setRm(Rm rm) {
 		this.rm = rm;
 	}
 

@@ -6,6 +6,7 @@ import com.ds.baza.dsbaza.model.user.User;
 import com.ds.baza.dsbaza.model.user.UserRole;
 import com.ds.baza.dsbaza.repository.RoleRepository;
 import com.ds.baza.dsbaza.repository.UserRepository;
+import com.ds.baza.dsbaza.utils.MyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -14,6 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationAdapter;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -65,6 +68,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void signup (UserCommand userCommand, Role role) {
         User user = userCommand.toUser();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -73,5 +77,17 @@ public class UserServiceImpl implements UserService {
         user.getUserRoles().add(new UserRole(user, role2));
         LOG.warn("Vrednost rola je {}", user.getUserRoles().getClass().getName());
         userRepository.save(user);
+        //ovde sada mozes napisati kod kojim nakon signup-a odmah ulogujes usera, jer smo te kodove napisali u MyUtils klasi.
+        //medjutim ako uradimo ovo MyUtils.login(user); nastaje problem jer je ovo transakcioni metod tako da ce se komitovanje desiti
+        //tek na izlasku iz koda pa se moe desiti da tu nesto pukne pri upisu u bazu a vec imamo ulogovanog korsnika
+        //zato to radimo na sledeći način
+//        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+//            @Override
+//            public void afterCommit() {
+//                MyUtils.login(user);
+//            }
+//        });
+        //medjutim taj ceo ovaj zakomentarisani metod nije lose prebaciti u MyUtils klasu i da ga ovde samo pozoves:
+//        MyUtils.afterCommit(() -> MyUtils.login(user));
     }
 }

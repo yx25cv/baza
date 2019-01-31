@@ -1,12 +1,14 @@
 package com.ds.baza.dsbaza.service;
 
 import com.ds.baza.dsbaza.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
+@Qualifier("userDetails")
 public class UserDetailesServiceImpl implements UserDetailsService {
 
     private UserRepository userRepository;

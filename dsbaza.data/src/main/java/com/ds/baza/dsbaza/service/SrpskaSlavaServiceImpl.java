@@ -33,7 +33,7 @@ public class SrpskaSlavaServiceImpl implements SrpskaSlavaService {
 
     @Override
     public SrpskaSlava findByNaziv(String naziv) {
-        return srpskaSlavaRepository.findByNaziv(naziv);
+        return srpskaSlavaRepository.findByNaziv(naziv).orElse(null);
     }
 
     @Override

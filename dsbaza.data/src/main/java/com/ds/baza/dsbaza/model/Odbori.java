@@ -1,15 +1,25 @@
 package com.ds.baza.dsbaza.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "ODBORI")
-public class Odbori extends BaseEntity {
-	private int BROJ_CLANOVA;
-	private int SIFRA_ODBORA;
-	private String KOMENTAR;
-	private int SIF_MESTO;
-	private int SIFRA_OPSTINE;
-	private String NAZIV;
+public class Odbori {
+
+	@Column(name = "BROJ_CLANOVA")
+	private int brojClanova;
+	@Id
+	@GeneratedValue
+	@Column(name = "SIFRA_ODBORA")
+	private Long id;
+	@Column(name = "KOMENTAR")
+	private String komentar;
+	@Column(name = "SIF_MESTO")
+	private int sifMesto;
+	@Column(name = "SIFRA_OPSTINE")
+	private int sifraOpstine;
+	@Column(name = "NAZIV")
+	private String naziv;
+
 }

@@ -66,7 +66,7 @@ public class MlbValidator implements ConstraintValidator<MlbValidatorConstraint,
                     .disableDefaultConstraintViolation();
             return false;
         }
-// ovaj deo eliminisem iz koda zato zbog onog problema sa duplicated value in db kod update-a, validacija je prebacena u controller
+// ovaj deo eliminisem iz koda zbog onog problema sa duplicated value in db kod update-a, validacija je prebacena u controller
 //        try {if (licniPodaciService.findByMlb(mlbField) != null) {
 //            context.buildConstraintViolationWithTemplate( "{com.ds.baza.dsbaza.model.Constraints.MlbValidatorConstraint.jmbgnepostoji}").addConstraintViolation().disableDefaultConstraintViolation();
 //            return false;

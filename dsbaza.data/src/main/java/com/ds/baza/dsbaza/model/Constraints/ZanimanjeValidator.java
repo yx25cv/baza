@@ -1,43 +1,44 @@
 package com.ds.baza.dsbaza.model.Constraints;
 
 import com.ds.baza.dsbaza.model.SrpskaSlava;
+import com.ds.baza.dsbaza.model.Zanimanje;
 import com.ds.baza.dsbaza.service.SrpskaSlavaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.validation.*;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
-public class SrpskaSlavaValidator implements ConstraintValidator<SrpskaSlavaValidatorConstraint, SrpskaSlava> {
+public class ZanimanjeValidator implements ConstraintValidator<ZanimanjeValidatorConstraint, Zanimanje> {
 
-    private static final Logger logger = LoggerFactory.getLogger(SrpskaSlavaValidator.class);
+    private static final Logger logger = LoggerFactory.getLogger(ZanimanjeValidator.class);
 
     @Autowired
     private SrpskaSlavaService srpskaSlavaService;
 
     @Override
-    public void initialize(SrpskaSlavaValidatorConstraint constraintAnnotation) {
+    public void initialize(ZanimanjeValidatorConstraint constraintAnnotation) {
 
     }
 
     @Override
-    public boolean isValid(SrpskaSlava srpskaSlavaField, ConstraintValidatorContext context) {
-if(srpskaSlavaField== null){
+    public boolean isValid(Zanimanje zanimanjeField, ConstraintValidatorContext context) {
+if(zanimanjeField == null) {
     return true;
 }
-        if(srpskaSlavaField.getNaziv().equals("")){
+        if(zanimanjeField.getNaziv().equals("")){
             return true;
         } else {
         try {
-            if (srpskaSlavaService.findByNaziv(srpskaSlavaField.getNaziv()) == null) {
+            if (srpskaSlavaService.findByNaziv(zanimanjeField.getNaziv()) == null) {
                 logger.info("prvi log");
-                context.buildConstraintViolationWithTemplate("{com.ds.baza.dsbaza.model.Constraints.SrpskaSlavaValidatorConstraint.srpskaslavanepostoji}").addConstraintViolation().disableDefaultConstraintViolation();
                 return false;
             }
         } catch (RuntimeException ex) {
             logger.info("drugi log");
             context.buildConstraintViolationWithTemplate("{com.ds.baza.dsbaza.model.Constraints.SrpskaSlavaValidatorConstraint.srpskaslavanepostoji}").addConstraintViolation().disableDefaultConstraintViolation();
-            return true;
+            return false;
         }
         return true;
     }}
